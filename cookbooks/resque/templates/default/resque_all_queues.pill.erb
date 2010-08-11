@@ -16,7 +16,7 @@ Bluepill.application("#{app_name}_resque", :log_file => "/var/log/bluepill.log")
     app.process("resque_worker_#{idx}") do |process|
       process.group = 'resque'
       process.pid_file = "/var/run/resque/#{app_name}/worker_#{idx}.pid"
-      process.start_command = "/usr/bin/rake -f /data/#{app_name}/current/Rakefile APP_ROOT=/data/#{app_name}/current RACK_ENV=#{rails_env} RAILS_ENV=#{rails_env} QUEUE=* resque:work"
+      process.start_command = "/usr/bin/rake -f /data/#{app_name}/current/Rakefile APP_ROOT=/data/#{app_name}/current RACK_ENV=#{rails_env} RAILS_ENV=#{rails_env} QUEUE=* environment resque:work"
       process.stop_command = <<-EOF
       kill -QUIT {{PID}}
       sleep_count=0
