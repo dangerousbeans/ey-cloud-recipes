@@ -3,58 +3,48 @@
 # Recipe:: default
 #
 if ['solo', 'util'].include?(node[:instance_role])
-  
-  package "sys-apps/ey-monit-scripts" do
-    action :install
-    version "0.17"
-  end
 
-  execute "install resque gem" do
-    command "gem install resque redis redis-namespace yajl-ruby -r"
-    not_if { "gem list | grep resque" }
-  end
-
-  case node[:ec2][:instance_type]
-    when 'm1.small': worker_count = 2
-    when 'c1.medium': worker_count = 3
-    when 'c1.xlarge': worker_count = 8
-      else 
-        worker_count = 4
-      end
+  %w[bluepill resque redis redis-namespace yajl-ruby].each do |install_gem|
+    gem_package install_gem do
+      action :install
     end
-  
+  end
+
+  # This is specific to EngineYard.
+  case node[:ec2][:instance_type]
+  when 'm1.small': worker_count = 2
+  when 'c1.medium': worker_count = 3
+  when 'c1.xlarge': worker_count = 8
+  else worker_count = 4
+  end
 
   node[:applications].each do |app, data|
-    template "/etc/monit.d/resque_#{app}.monitrc" do 
-    owner 'root' 
-    group 'root' 
-    mode 0644 
-    source "monitrc.conf.erb" 
-    variables({ 
-    :num_workers => worker_count,
-    :app_name => app, 
-    :rails_env => node[:environment][:framework_env] 
-    }) 
+
+    config_path = "/data/#{app}/shared/config/resque"
+    pid_path = "/var/run/resque/#{app}"
+    execute "make resque directories" do
+      command "mkdir -p #{config_path} #{pid_path} && chmod 755 #{config_path} #{pid_path} && chown #{node[:owner_name]}:#{node[:owner_name]} #{config_path} #{pid_path}"
     end
 
-    worker_count.times do |count|
-      template "/data/#{app}/shared/config/resque_#{count}.conf" do
+    template "#{config_path}/resque.pill" do
       owner node[:owner_name]
       group node[:owner_name]
       mode 0644
-      source "resque_wildcard.conf.erb"
-      end
+      source "resque.pill.erb"
+      variables({
+        :num_workers => worker_count,
+        :app_name => app,
+        :rails_env => node[:environment][:framework_env],
+        :owner_name => node[:owner_name]
+      })
     end
 
-  execute "ensure-resque-is-setup-with-monit" do 
-    command %Q{ 
-    monit reload 
-    } 
+    execute "ensure-bluebill-has-pill" do
+      command %Q{
+        bluepill load #{config_path}/resque.pill
+      }
+    end
+
   end
 
-  execute "restart-resque" do 
-    command %Q{ 
-      echo "sleep 20 && monit -g #{app}_resque restart all" | at now 
-    } 
-  end 
 end
