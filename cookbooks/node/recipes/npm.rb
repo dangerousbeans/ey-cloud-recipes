@@ -19,5 +19,5 @@ end
 
 execute "make_install" do
   not_if { FileTest.exists?("/usr/bin/npm") }
-  command "cd /var/tmp/github/npm;make install"
+  command "cd /var/tmp/github/npm;/usr/bin/node cli.js install"
 end
