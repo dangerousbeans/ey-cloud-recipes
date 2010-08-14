@@ -23,7 +23,6 @@ end
 execute "configure_node_js" do
   command "cd /var/tmp/github/node;./configure --prefix=/usr"
   user node[:owner_name]
-  only_if { FileTest.directory?("/var/tmp/github/node/configure") }
 end
 
 execute "make_node_js" do
