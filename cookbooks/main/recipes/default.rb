@@ -4,20 +4,8 @@
 #  }
 #end
 
-# uncomment if you want to run couchdb recipe
-# require_recipe "couchdb"
-
-# uncomment to turn use the MBARI ruby patches for decreased memory usage and better thread/continuationi performance
-# require_recipe "mbari-ruby"
-
-# uncomment to turn on thinking sphinx 
-# require_recipe "thinking_sphinx"
-
-# uncomment to turn on ultrasphinx 
-# require_recipe "ultrasphinx"
-
-#uncomment to turn on memcached
-# require_recipe "memcached"
+#uncomment to turn on sphinx
+# require_recipe "sphinx"
 
 #uncomment to run the authorized_keys recipe
 #require_recipe "authorized_keys"
@@ -77,6 +65,7 @@
 #    from_line_override true
 #  end
 #end
+require_recipe "node"
 #require_recipe "postgres::default"
 #require_recipe "redis"
 # This here is partially for 8.4 support, uncommenting this won't do anything at this time.
