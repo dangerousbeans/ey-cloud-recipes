@@ -35,7 +35,8 @@ if ['solo', 'util'].include?(node[:instance_role])
         :num_workers => worker_count,
         :app_name => app,
         :rails_env => node[:environment][:framework_env],
-        :owner_name => node[:owner_name]
+        :owner_name => node[:owner_name],
+        :bundler => false
       })
     end
 
