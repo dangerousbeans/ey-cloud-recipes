@@ -5,7 +5,7 @@ directory "/var/tmp/github" do
   group node[:owner_name]
 end
 
-excute "update_npm" do
+execute "update_npm" do
   only_if { FileTest.directory?("/var/tmp/github/npm/.git") }
   command "cd /var/tmp/github/npm;git pull"
   user node[:owner_name]
