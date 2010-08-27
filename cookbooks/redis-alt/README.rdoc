@@ -1,0 +1,5 @@
+= DESCRIPTION:
+
+Redis alternate recipe provided by GMFlash.
+
+Thanks!
