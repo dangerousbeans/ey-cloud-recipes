@@ -20,7 +20,12 @@ flavor = "thinking_sphinx"
  cron_interval = 10
 
 if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
-  sphinx_instance = if node.engineyard.environment.solo_cluster?
+  gem_package "curb" do
+    version "0.3.4"
+    action :install
+  end
+
+sphinx_instance = if node.engineyard.environment.solo_cluster?
     node.engineyard.environment.instances.first
   else
     node.engineyard.environment.utility_instances.find {|x| x.name == "sphinx"}
