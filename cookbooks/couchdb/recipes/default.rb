@@ -34,5 +34,6 @@ template "/etc/couchdb/local.ini" do
 end
 
 execute "start CouchDB" do
-  command "/etc/init.d/couchdb start &> /dev/null"
+  command "echo '/etc/init.d/couchdb start | at now'"
+  not_if "/etc/init.d/couchdb status"
 end
