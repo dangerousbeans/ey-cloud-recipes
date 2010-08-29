@@ -4,6 +4,7 @@
 #
 
 package "dev-db/couchdb" do
+  version "0.9.1"
   action :purge
 end
 

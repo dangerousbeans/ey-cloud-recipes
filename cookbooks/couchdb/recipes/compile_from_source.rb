@@ -3,6 +3,20 @@
 # Recipe:: compile_from_source
 #
 
+directory "/engineyard/portage/packages" do
+  action :create
+  owner "root"
+  group "root"
+  mode 0755
+end
+
+directory "/engineyard/portage/packages/dev-db" do
+  action :create
+  owner "root"
+  group "root"
+  mode 0755
+end
+
 version  = "1.0.1"
 tarfile  = "apache-couchdb-#{version}.tar.gz"
 work_dir = "/tmp"
@@ -14,62 +28,19 @@ execute "stop CouchDB" do
   only_if "! couchdb -V | grep #{version}"
 end
 
-remote_file src_file do
-  source tarfile
-  backup false
-  only_if "! couchdb -V | grep #{version}"
-end
+packages_to_install = ['dev-db/couchdb-1.0.1.tbz2'].each do |packages_to_fetch|
 
-execute "decompress #{tarfile}" do
-  cwd work_dir
-  command "tar -xzf #{tarfile}"
-  only_if "ls #{src_file}"
-end
-
-execute "configure CouchDB" do
-  cwd src_dir
-  command %Q(
-    ./configure \
-    --prefix=/usr \
-    --localstatedir=/var \
-    --sysconfdir=/etc
-  )
-  only_if "ls #{src_dir}"
-end
-
-execute "compile and install CouchDB" do
-  cwd src_dir
-  command "make && make install"
-  only_if "ls #{src_dir}/Makefile"
-end
-
-directory src_dir do
-  action :delete
-  recursive true
-  only_if "ls #{src_dir}"
-end
-
-file src_file do
-  action :delete
-  backup false
-  only_if "ls #{src_file}"
-end
-
-user "couchdb" do
-  home "/var/lib/couchdb"
-  shell "/sbin/nologin"
-end
-
-%w(/etc /var/lib /var/log /var/run).each do |dir|
-  directory "#{dir}/couchdb" do
-    owner "couchdb"
-    group "couchdb"
-    mode 0750
+  remote_file "/engineyard/portage/packages/#{packages_to_fetch}" do
+    source "http://http://ey-portage.s3.amazonaws.com/#{node[:kernel][:machine]}/#{packages_to_fetch}"
+    backup false
+    only_if "! couchdb -V | grep #{version}"
   end
 
-  execute "change owner:group of #{dir}/couchdb" do
-    command "chown -R couchdb:couchdb #{dir}/couchdb"
+  execute "install_couchdb_1.0.1" do
+    command "emerge /engineyard/portage/packages/#{packages_to_fetch}"
+    action :run
   end
+
 end
 
 remote_file "/etc/init.d/couchdb" do
