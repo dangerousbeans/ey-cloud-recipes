@@ -1,0 +1,3 @@
+= DESCRIPTION:
+
+CouchDB recipe provided by Michael Sheakoski (GMFlash on Freenode).

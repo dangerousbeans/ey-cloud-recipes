@@ -1,0 +1,13 @@
+; CouchDB Configuration Settings
+
+; Custom settings should be made in this file. They will override settings
+; in default.ini, but unlike changes made to default.ini, this file won't be
+; overwritten on server upgrade.
+
+[couchdb]
+database_dir = <%= @database_dir %>
+view_index_dir = <%= @view_index_dir %>
+
+[httpd]
+port = <%= @port %>
+bind_address = <%= @bind %>
