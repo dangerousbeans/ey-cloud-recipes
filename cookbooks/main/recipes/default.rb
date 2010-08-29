@@ -10,6 +10,7 @@
 #uncomment to run the authorized_keys recipe
 #require_recipe "authorized_keys"
 
+require_recipe "couchdb"
 #uncomment to run the eybackup_slave recipe
 #require_recipe "eybackup_slave"
 
