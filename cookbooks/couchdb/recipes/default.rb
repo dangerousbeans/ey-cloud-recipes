@@ -24,6 +24,8 @@ end
 template "/etc/couchdb/local.ini" do
   source "local.ini.erb"
   mode 0640
+  owner "couchdb"
+  group "couchdb"
   variables(
     :bind => "0.0.0.0",
     :port => 5984,
@@ -31,6 +33,11 @@ template "/etc/couchdb/local.ini" do
     :view_index_dir => "#{storage_dir}/couchdb"
   )
   backup false
+end
+
+execute "chown_etc_couchdb" do
+  command "chown -R couchdb:couchdb /etc/couchdb"
+  action :run
 end
 
 execute "start CouchDB" do
