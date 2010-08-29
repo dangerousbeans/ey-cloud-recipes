@@ -41,6 +41,8 @@ execute "chown_etc_couchdb" do
 end
 
 execute "start CouchDB" do
-  command "echo '/etc/init.d/couchdb start | at now'"
+  command %Q{ 
+    echo "/etc/init.d/couchdb start" | at now
+  }
   not_if "/etc/init.d/couchdb status"
 end
