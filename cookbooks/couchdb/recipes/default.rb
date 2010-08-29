@@ -42,7 +42,7 @@ end
 
 execute "start CouchDB" do
   command %Q{ 
-    echo "/etc/init.d/couchdb start" | at now
+    echo "/etc/init.d/couchdb start &> /dev/null" | at now
   }
   not_if "/etc/init.d/couchdb status"
 end
