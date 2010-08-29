@@ -8,6 +8,11 @@ package "dev-db/couchdb" do
   action :purge
 end
 
+execute "remove_old_default_ini" do
+  command "rm /etc/couchdb/default.ini"
+  only_if { "cat /etc/couchdb/default.ini | grep 0.9.1" }
+end
+
 require_recipe "couchdb::compile_from_source"
 
 storage_dir = case node[:instance_role]
