@@ -1,3 +1,29 @@
 = DESCRIPTION:
 
 CouchDB recipe provided by Michael Sheakoski (GMFlash on Freenode).
+
+= LONG DESCRIPTION:
+
+Apache CouchDB is a document-oriented database that can be queried and indexed in a MapReduce fashion using JavaScript. CouchDB also offers incremental replication with bi-directional conflict detection and resolution.
+
+CouchDB provides a RESTful JSON API than can be accessed from any environment that allows HTTP requests. There are myriad third-party client libraries that make this even easier from your programming language of choice. CouchDB’s built in Web administration console speaks directly to the database using HTTP requests issued from your browser.
+
+CouchDB is written in Erlang, a robust functional programming language ideal for building concurrent distributed systems. Erlang allows for a flexible design that is easily scalable and readily extensible.
+
+= USAGE: 
+
+require_recipe "couchdb" in main/recipes/default.rb
+
+= WARNING:
+
+No backup automation is setup in this recipe, nor implied.  Please back up your files manually, we store the files on the EBS however that isn't 100%.
+
+= CREDITS:
+
+GMFlash on Freenode aka Michael Sheakoski for producing a wonderful couchdb recipe to start with.
+
+Damm on Freenode aka Scott M. Likens (me) for tying it together with the packages and a few odd failures to debug debugged so it starts up right.
+
+= WARRANTY:
+
+No Warranty is implied or given.  This recipe is available to you as-is with no support from engineyard what so ever.
