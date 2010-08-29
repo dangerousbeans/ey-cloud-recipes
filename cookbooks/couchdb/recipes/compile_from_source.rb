@@ -31,7 +31,7 @@ end
 packages_to_install = ['dev-db/couchdb-1.0.1.tbz2'].each do |packages_to_fetch|
 
   remote_file "/engineyard/portage/packages/#{packages_to_fetch}" do
-    source "http://http://ey-portage.s3.amazonaws.com/#{node[:kernel][:machine]}/#{packages_to_fetch}"
+    source "http://ey-portage.s3.amazonaws.com/#{node[:kernel][:machine]}/#{packages_to_fetch}"
     backup false
     only_if "! couchdb -V | grep #{version}"
   end
