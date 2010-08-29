@@ -1,0 +1,43 @@
+#!/sbin/runscript
+#
+# Redis init script for Gentoo
+#
+
+opts="start stop restart"
+
+depend() {
+	use net
+}
+
+REDIS_CONF="${REDIS_CONF:-/etc/redis.conf}"
+REDIS_PID_FILE=$(awk '/^pidfile\ / { print $2 }' ${REDIS_CONF} 2>/dev/null | head -n1)
+REDIS_PID_FILE="${REDIS_PID_FILE:-/var/run/redis.pid}"
+REDIS_PORT=$(awk '/^port\ / { print $2 }' ${REDIS_CONF} 2>/dev/null | head -n1)
+REDIS_PORT="${REDIS_PORT:-6379}"
+REDIS_USER="${REDIS_USER:-redis}"
+REDIS_GROUP="${REDIS_GROUP:-redis}"
+
+start() {
+	ebegin "Starting Redis server"
+	start-stop-daemon --start --quiet \
+		--pidfile ${REDIS_PID_FILE} \
+		--chuid ${REDIS_USER}:${REDIS_GROUP} \
+		--exec /usr/bin/redis-server -- \
+		${REDIS_CONF} ${REDIS_EXTRA_OPTS}
+	local ret=$?
+	pidof -o $$ -o $PPID -o %PPID -x /usr/bin/redis-server > ${REDIS_PID_FILE}
+	[ ${ret} -ne 0 ] && rm -f ${REDIS_PID_FILE}
+	eend ${ret}
+}
+
+stop() {
+	ebegin "Stopping Redis server"
+	/usr/bin/redis-cli -p ${REDIS_PORT} shutdown
+	pidof -o $$ -o $PPID -o %PPID -x /usr/bin/redis-server > /dev/null
+	if [ $? -eq 0 ]; then
+		eend 1
+	else
+		rm -f ${REDIS_PID_FILE}
+		eend 0
+	fi
+}

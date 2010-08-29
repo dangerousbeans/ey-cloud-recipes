@@ -3,33 +3,27 @@
 # Recipe:: compile_from_source
 #
 
+version  = "1.3.17"
 tarfile  = "redis-2.0.0-rc4.tar.gz"
 work_dir = "/tmp"
 src_file = "#{work_dir}/#{tarfile}"
-src_dir  = src_file.slice(/(.+)\.tar\.gz/, 1)
+src_dir  = src_file.slice(/(.+)\.tar\.gz$/, 1)
+
+execute "stop Redis" do
+  command "/etc/init.d/redis stop || true"
+  only_if "! redis-cli info | grep #{version}"
+end
 
 remote_file src_file do
   source tarfile
   backup false
-end
-
-ruby_block "check Redis src version" do
-  block do
-    version = `tar -xzf #{src_file} -O`.grep(/#define REDIS_VERSION/).first.slice(/"([^"]+)"/, 1)
-    @src_is_newer = `redis-cli info`.grep(/#{version}/).empty?
-  end
-end
-
-service "redis" do
-  supports :restart => true, :status => true
-  action :stop
-  only_if @src_is_newer
+  only_if "! redis-cli info | grep #{version}"
 end
 
 execute "decompress #{tarfile}" do
   cwd work_dir
   command "tar -xzf #{tarfile}"
-  only_if File.exist?(src_file) && @src_is_newer
+  only_if "ls #{src_file}"
 end
 
 execute "compile source" do
@@ -52,4 +46,35 @@ end
 file src_file do
   action :delete
   backup false
+end
+
+user "redis" do
+  home "/var/lib/redis"
+  shell "/sbin/nologin"
+end
+
+%w(/var/lib /var/log /var/run).each do |dir|
+  directory "#{dir}/redis" do
+    owner "redis"
+    group "redis"
+    mode 0750
+  end
+
+  execute "change owner:group of #{dir}/redis" do
+    command "chown -R redis:redis #{dir}/redis"
+  end
+end
+
+remote_file "/etc/init.d/redis" do
+  source "redis.init"
+  owner "root"
+  group "root"
+  mode 0755
+end
+
+remote_file "/etc/conf.d/redis" do
+  source "redis.conf"
+  owner "root"
+  group "root"
+  mode 0644
 end

@@ -4,32 +4,38 @@
 #
 
 package "dev-db/redis" do
-  action :install
+  action :purge
 end
 
-directory "/data/redis" do
-  owner "redis"
-  group "redis"
-  mode 0755
-  recursive true
-end
-
-# Overwrite the package binaries if the redis source code is newer
 require_recipe "redis::compile_from_source"
 
+storage_dir = case node[:instance_role]
+  when "db_master", "db_slave", "solo" then "/db"
+  else "/data"
+end
+
+directory "#{storage_dir}/redis" do
+  owner "redis"
+  group "redis"
+  mode 0750
+end
+
 template "/etc/redis.conf" do
-  mode 0644
   source "redis.conf.erb"
+  owner "redis"
+  group "redis"
+  mode 0640
   variables(
-    :pidfile   => "/var/run/redis.pid",
-    :port      => "6379",
     :bind      => "0.0.0.0",
+    :port      => 6379,
     :timeout   => 300,
-    :loglevel  => "notice",
-    :logfile   => "/data/redis/redis.log",
-    :databases => "16",
-    :dir       => "/data/redis"
+    :databases => 16,
+    :dir       => "#{storage_dir}/redis",
+    :pidfile   => "/var/run/redis/redis.pid",
+    :logfile   => "/var/log/redis/redis.log",
+    :loglevel  => "notice"
   )
+  backup false
 end
 
 execute "enable vm.overcommit_memory" do
