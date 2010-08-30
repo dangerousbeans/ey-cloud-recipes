@@ -14,6 +14,8 @@ require_recipe "couchdb" in main/recipes/default.rb
 
 No backup automation is setup in this recipe, nor implied.  Please back up your files manually, we store the files on the EBS however that isn't 100%.
 
+Additionally this uses erlang R14A which may give more speed, or crash you.
+
 = CREDITS:
 
 GMFlash on Freenode aka Michael Sheakoski for producing a wonderful couchdb recipe to start with.
