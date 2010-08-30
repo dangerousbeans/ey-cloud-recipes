@@ -5,16 +5,6 @@
 
 if ['solo','app_master','app','util'].include?(node[:instance_role])
 
-  package "dev-db/couchdb" do
-    version "0.9.1"
-    action :purge
-  end
-
-  execute "remove_old_default_ini" do
-    command "rm /etc/couchdb/default.ini"
-    only_if { "cat /etc/couchdb/default.ini | grep 0.9.1" }
-  end
-
   require_recipe "couchdb::compile_from_source"
 
   storage_dir = case node[:instance_role]
