@@ -17,6 +17,13 @@ directory "/engineyard/portage/packages/dev-db" do
   mode 0755
 end
 
+directory "/engineyard/portage/packages/dev-lang" do
+  action :create
+  owner "root"
+  group "root"
+  mode 0755
+end
+
 version  = "1.0.1"
 tarfile  = "apache-couchdb-#{version}.tar.gz"
 work_dir = "/tmp"
