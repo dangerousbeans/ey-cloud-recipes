@@ -30,6 +30,14 @@ if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
     version "0.9.9"
   end
 
+  remote_file "/engineyard/bin/thinking_sphinx_searchd" do
+    source "thinking_sphinx_searchd"
+    owner "root"
+    group "root"
+    backup 0
+    mode 0755
+  end
+
 sphinx_instance = if node.engineyard.environment.solo_cluster?
     node.engineyard.environment.instances.first
   else
