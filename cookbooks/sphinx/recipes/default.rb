@@ -111,12 +111,12 @@ sphinx_instance = if node.engineyard.environment.solo_cluster?
     #   # command "chown #{node[:owner_name]}:#{node[:owner_name]} -R /data/sphinx"
     # end
       execute "log rake taks" do
-        command "rake -T >> /tmp/rake_tasks.out"
+        command "bundle exec rake -T || rake -T >> /tmp/rake_tasks.out"
         cwd "/data/#{app.name}/current"
       end
       execute "sphinx config" do
       
-        command "rake #{flavor}:configure"
+        command "bundle exec rake #{flavor}:configure || exec rake #{flavor}:configure"
         user node[:owner_name]
         environment({
           'HOME' => "/home/#{node[:owner_name]}",
@@ -126,7 +126,7 @@ sphinx_instance = if node.engineyard.environment.solo_cluster?
       end
 
       execute "#{flavor} index" do
-        command "rake #{flavor}:index"
+        command "bundle exec rake #{flavor}:index || rake #{flavor}:index"
         user node[:owner_name]
         environment({
           'HOME' => "/home/#{node[:owner_name]}",
@@ -147,7 +147,7 @@ sphinx_instance = if node.engineyard.environment.solo_cluster?
           day     '*'
           month   '*'
           weekday '*'
-          command "cd /data/#{app.name}/current && RAILS_ENV=#{node[:environment][:framework_env]} rake #{flavor}:index"
+          command "cd /data/#{app.name}/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake #{flavor}:index || rake #{flavor}:index"
           user node[:owner_name]
         end
       end
