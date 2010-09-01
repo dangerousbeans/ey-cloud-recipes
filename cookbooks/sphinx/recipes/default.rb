@@ -25,6 +25,11 @@ if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
     action :install
   end
 
+  package "app-misc/sphinx" do
+    action :upgrade
+    version "0.9.9"
+  end
+
 sphinx_instance = if node.engineyard.environment.solo_cluster?
     node.engineyard.environment.instances.first
   else
