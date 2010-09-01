@@ -5,7 +5,7 @@
 #end
 
 #uncomment to turn on sphinx
-require_recipe "sphinx"
+#require_recipe "sphinx"
 
 #uncomment to run the authorized_keys recipe
 #require_recipe "authorized_keys"
