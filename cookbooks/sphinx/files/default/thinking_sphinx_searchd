@@ -48,19 +48,19 @@ if [ -d /data/$1/current ]; then
   case "$2" in
     start)
       echo "Starting searchd"
-      $COMMAND bundle exec rake thinking_sphinx:start || rake thinking_sphinx:start >> $OUTPUT 2>&1
+      $COMMAND rake thinking_sphinx:start || rake thinking_sphinx:start >> $OUTPUT 2>&1
       ;;
     stop)
       echo "Stopping searchd"
-      $COMMAND bundle exec rake thinking_sphinx:stop || rake thinking_sphinx:stop >> $OUTPUT 2>&1
+      $COMMAND rake thinking_sphinx:stop || rake thinking_sphinx:stop >> $OUTPUT 2>&1
       ;;
     configure)
       echo "Configuring your searchd indexes"
-      $COMMAND bundle exec rake thinking_sphinx:configure || rake thinking_sphinx:configure >> $OUTPUT 2>&1
+      $COMMAND rake thinking_sphinx:configure || rake thinking_sphinx:configure >> $OUTPUT 2>&1
       ;;
     reindex)
       echo "Reindexing your searchd indexes against the live server"
-      $COMMAND bundle exec rake thinking_sphinx:index || rake thinking_sphinx:index >> $OUTPUT 2>&1
+      $COMMAND rake thinking_sphinx:index || rake thinking_sphinx:index >> $OUTPUT 2>&1
       ;;
     *)
       usage
