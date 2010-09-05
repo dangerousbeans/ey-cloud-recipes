@@ -275,7 +275,7 @@ File STDOUT
 </Threshold>
 
 <Plugin exec>
-  Exec "nobody" "/etc/exim/collectd_mailq.sh"
+  Exec "<%= @user %>" "/etc/exim/collectd_mailq.sh"
 </Plugin>
 
 <Plugin exec>
