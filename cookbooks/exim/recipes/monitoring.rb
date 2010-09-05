@@ -8,7 +8,22 @@ node[:applications].each do |app_name,data|
   @@db_name << app_name
 end
 
-template "/opt/collectd/etc/collectd.conf" do
+directory "/etc/exim" do
+  action :create
+  owner "root"
+  group "root"
+  mode 0755
+end
+
+remote_file "/etc/exim/collectd_mailq.sh" do
+  source "collectd_mailq.sh"
+  owner "root"
+  group "root"
+  mode 0755
+  backup 0
+end
+
+  template "/opt/collectd/etc/collectd.conf" do
   owner 'root'
   group 'root'
   mode 0644
