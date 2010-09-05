@@ -38,12 +38,20 @@ end
   })
 end
 
-update_file "add queue_count to types.db" do
-  path "/opt/collectd/lib/collectd/types.db"
-  body "queue_count		value:GAUGE:U:U"
-  not_if "fgrep 'queue_count' /opt/collectd/lib/collectd/types.db"
-end
+exim_instance = if node.engineyard.environment.solo_cluster?
+                  node.engineyard.environment.instances.first
+                else
+                  node.engineyard.environment.utility_instances.find {|x| x.name == "exim"}
+                end
 
+if node.engineyard == exim_instance
+  remote_file "/opt/collectd/lib/collectd/types.db" do
+    owner "root"
+    group "root"
+    mode "0644"
+    backup 0
+  end
+end
 execute "telinit q" do
   action :run
 end
