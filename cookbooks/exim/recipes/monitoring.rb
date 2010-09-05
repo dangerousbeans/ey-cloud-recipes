@@ -55,7 +55,7 @@ if node.engineyard == exim_instance
 end
 
 execute "update_group" do
-  command "gpasswd -a #{@node[:owner_name] mail"
+  command "gpasswd -a #{@node[:owner_name]} mail"
 end
 
 execute "telinit q" do
