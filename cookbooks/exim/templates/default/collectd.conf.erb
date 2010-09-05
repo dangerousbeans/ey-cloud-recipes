@@ -37,6 +37,11 @@ LoadPlugin exec
 LoadPlugin tcpconns
 #LoadPlugin unixsock
 
+<Plugin logfile>
+LogLevel debug
+File STDOUT
+ Timestamp true
+</Plugin>
 #<Plugin apache>
 #	URL "http://localhost/status?auto"
 #	User "www-user"
