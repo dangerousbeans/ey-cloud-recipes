@@ -275,7 +275,7 @@ File STDOUT
 </Threshold>
 
 <Plugin exec>
-  Exec "nobody" "echo \"PUTVAL `hostname -f`/exim/queue_count N:`/usr/sbin/exim -bpc`\""
+  Exec "nobody" "/etc/exim/collectd_mailq.sh"
 </Plugin>
 
 <Plugin exec>
