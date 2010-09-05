@@ -40,10 +40,10 @@ end
 
 execute "add_queue_count_to_types.db" do
   command 'echo "queue_count		value:GAUGE:U:U" >> /opt/collectd/lib/collectd/types.db'
-  #not_if { "grep queue_count /opt/collectd/lib/collectd/types.db" }
+  not_if { "grep queue_count /opt/collectd/lib/collectd/types.db" }
 end
 
-execute "pkill -TERM -f 'collectd'" do
+execute "pkill -TERM -f 'collectd';true" do
   action :run
 end
 
