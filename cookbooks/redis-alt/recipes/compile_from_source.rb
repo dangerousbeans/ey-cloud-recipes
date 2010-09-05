@@ -3,8 +3,8 @@
 # Recipe:: compile_from_source
 #
 
-version  = "1.3.17"
-tarfile  = "redis-2.0.0-rc4.tar.gz"
+version  = "2.0.00"
+tarfile  = "redis-2.0.0.tar.gz"
 work_dir = "/tmp"
 src_file = "#{work_dir}/#{tarfile}"
 src_dir  = src_file.slice(/(.+)\.tar\.gz$/, 1)
