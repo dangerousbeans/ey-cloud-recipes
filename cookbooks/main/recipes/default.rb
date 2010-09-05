@@ -54,12 +54,12 @@
 #                end
 #
 #if node.engineyard == exim_instance
-exim_auth "auth" do
-my_hostname "example.com"
-smtp_host "example.com"
-username "username"
-password "password"
-end
+#exim_auth "auth" do
+#my_hostname "example.com"
+#smtp_host "example.com"
+#username "username"
+#password "password"
+#end
 #else
 #  Chef::Log.info "Util server is #{exim_instance.id}"
 #  ssmtp_conf "default" do

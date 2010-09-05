@@ -1,5 +1,11 @@
 # Monitoring Automation for exim + collectd... use at your own risk.
+exim_instance = if node.engineyard.environment.solo_cluster?
+                  node.engineyard.environment.instances.first
+                else
+                  node.engineyard.environment.utility_instances.find {|x| x.name == "exim"}
+                end
 
+if node.engineyard == exim_instance
 execute "touch /opt/collectd/etc/keep.collectd.conf" do
   action :run
 end
@@ -38,20 +44,12 @@ end
   })
 end
 
-exim_instance = if node.engineyard.environment.solo_cluster?
-                  node.engineyard.environment.instances.first
-                else
-                  node.engineyard.environment.utility_instances.find {|x| x.name == "exim"}
-                end
-
-if node.engineyard == exim_instance
-  remote_file "/opt/collectd/lib/collectd/types.db" do
-    source "types.db"
-    owner "root"
-    group "root"
-    mode "0644"
-    backup 0
-  end
+remote_file "/opt/collectd/lib/collectd/types.db" do
+  source "types.db"
+  owner "root"
+  group "root"
+  mode "0644"
+  backup 0
 end
 
 execute "update_group" do
@@ -65,4 +63,4 @@ end
 execute "telinit q" do
   action :run
 end
-
+end

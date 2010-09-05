@@ -16,3 +16,8 @@ exim_auth "auth" do
 end
 
 Then commit and ey recipes upload -e <ENV> and then apply ey recipes apply -e <ENV>
+
+= WARNING:
+
+There's some bits in here for queue monitoring with exim now.  It has code to carefully block that a few files are not updated on each host, specifically collectd.conf and types.db... they assume you are knowing what you're doing so when forking/copying update/enable to suite your needs.
+
