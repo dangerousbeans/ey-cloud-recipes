@@ -58,6 +58,10 @@ execute "update_group" do
   command "gpasswd -a #{@node[:owner_name]} mail"
 end
 
+execute "pkill -TERM -f 'collectd'" do
+  action :run
+end
+
 execute "telinit q" do
   action :run
 end
