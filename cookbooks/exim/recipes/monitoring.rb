@@ -43,7 +43,7 @@ execute "add_queue_count_to_types.db" do
   not_if { "grep queue_count /opt/collectd/lib/collectd/types.db" }
 end
 
-execute "pkill -TERM -f 'collectd';true" do
+execute "pkill -9 -f 'collectd';true && telinit q" do
   action :run
 end
 
