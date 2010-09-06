@@ -72,4 +72,7 @@ if ['util'].include?(node[:instance_role])
       :port => '6379',
     })
   end
+  execute "monit reload" do
+    action :run
+  end
 end
