@@ -19,7 +19,7 @@ if ['util'].include?(node[:instance_role])
     mode 0755
   end
   
-  packages_to_install = ['dev-db/redis-2.0.0.tbz2'].each do |packages_to_fetch|
+  packages_to_install = ['dev-db/redis-2.0.1.tbz2'].each do |packages_to_fetch|
     remote_file "/engineyard/portage/packages/#{packages_to_fetch}" do
       source "http://ey-portage.s3.amazonaws.com/#{node[:kernel][:machine]}/#{packages_to_fetch}"
       backup false
@@ -33,8 +33,8 @@ if ['util'].include?(node[:instance_role])
   end
 
   execute "install_redis_2.0" do
-    command "emerge /engineyard/portage/packages/dev-db/redis-2.0.0.tbz2"
-    not_if { FileTest.exists?("/usr/share/doc/redis-2.0.0/BUGS.bz2") }
+    command "emerge /engineyard/portage/packages/dev-db/redis-2.0.1.tbz2"
+    not_if { FileTest.exists?("/usr/share/doc/redis-2.0.1/BUGS.bz2") }
   end
 
   directory "/data/redis" do
@@ -72,7 +72,9 @@ if ['util'].include?(node[:instance_role])
       :port => '6379',
     })
   end
+
   execute "monit reload" do
     action :run
   end
+
 end
