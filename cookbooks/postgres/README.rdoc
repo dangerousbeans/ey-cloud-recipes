@@ -8,7 +8,10 @@ This recipe can install multiple versions of Postgresql.  Currently this is modi
 
 Current Versions Working,
 
-9.0RC1
+9.0RC1 (9.0)*
+8.4.2 (8.4)* 
+
+* Denotes the version you select in attributes/postgresql.rb
 
 = REQUIREMENTS:
 
