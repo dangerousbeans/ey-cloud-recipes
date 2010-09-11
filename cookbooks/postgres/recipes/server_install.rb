@@ -7,12 +7,12 @@ when "9.0"
 
   execute "emerge -C =dev-db/postgresql-server-8.3.5" do
     action :run
-    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-base-8.3.5") }
+    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-server-8.3.5") }
   end
 
   execute "emerge -C =dev-db/postgresql-base-8.3.5" do
     action :run
-    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-server-8.3.5") }
+    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-base-8.3.5") }
   end
 
   directory "/engineyard/portage/packages" do
@@ -55,12 +55,12 @@ when "8.4"
 
     execute "emerge -C =dev-db/postgresql-server-8.3.5" do
     action :run
-    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-base-8.3.5") }
+    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-server-8.3.5") }
   end
 
   execute "emerge -C =dev-db/postgresql-base-8.3.5" do
     action :run
-    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-server-8.3.5") }
+    only_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-base-8.3.5") }
   end
 
   directory "/engineyard/portage/packages" do
