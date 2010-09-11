@@ -1,6 +1,14 @@
 = DESCRIPTION:
 
-Postgresql 8.3 Cookbook.  The goal is to start up a decently configured postgresql recipe and symlink database.yml so that your application knows where to go.
+Postgresql Cookbook for Appcloud.
+
+= LONG DESCRIPTION:
+
+This recipe can install multiple versions of Postgresql.  Currently this is modified by editing the postgres_version in attributes/postgresql.rb
+
+Current Versions Working,
+
+9.0RC1
 
 = REQUIREMENTS:
 

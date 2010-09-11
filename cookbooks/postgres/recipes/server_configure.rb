@@ -94,7 +94,7 @@ user "postgres" do
 end
 
 execute "start-postgres" do
-  command "echo \"/etc/init.d/postgresql-#{postgres_version} restart\" | at now && sleep 20"
+  command "/etc/init.d/postgresql-#{postgres_version} restart"
     action :run
   not_if "/etc/init.d/postgresql-#{postgres_version} status | grep -q start"
 end
