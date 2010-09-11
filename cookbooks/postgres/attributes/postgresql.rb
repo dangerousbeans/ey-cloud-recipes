@@ -1,4 +1,4 @@
-postgres_version("8.4")
+postgres_version("9.0")
 postgres_root("/db/postgresql")
 default_statistics_target("100")
 max_fsm_pages("500000") 
