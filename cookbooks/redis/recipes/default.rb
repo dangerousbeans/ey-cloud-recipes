@@ -3,8 +3,6 @@
 # Recipe:: default
 #
 
-if ['util'].include?(node[:instance_role])
-
   directory "/engineyard/portage/packages" do
     action :create
     owner "root"
@@ -76,5 +74,3 @@ if ['util'].include?(node[:instance_role])
   execute "monit reload" do
     action :run
   end
-
-end
