@@ -74,7 +74,8 @@ run_for_app(appname) do |app_name, data|
         mode 0755
       end
 
-      template "/data/#{app_name}/shared/config/sphinx.yml" do
+      begin
+     template "/data/#{app_name}/shared/config/sphinx.yml" do
         owner node[:owner_name]
         group node[:owner_name]
         mode 0644
@@ -87,6 +88,21 @@ run_for_app(appname) do |app_name, data|
           :user => node[:owner_name]
         })
       end
+      rescue
+     template "/data/#{app_name}/shared/config/sphinx.yml" do
+        owner node[:owner_name]
+        group node[:owner_name]
+        mode 0644
+        source "sphinx.yml.erb"
+        variables({
+          :sphinx_ip => "localhost",
+          :app_name => app_name,
+          :flavor => flavor.eql?("thinking_sphinx") ? "thinkingsphinx" : flavor,
+          :mem_limit => 32,
+          :user => node[:owner_name]
+        })
+      end
+    end
 
       template "/etc/monit.d/sphinx.#{app_name}.monitrc" do
         source "sphinx.monitrc.erb"
@@ -108,7 +124,7 @@ run_for_app(appname) do |app_name, data|
           day     '*'
           month   '*'
           weekday '*'
-          command "cd /data/#{app.name}/current && RAILS_ENV=#{node[:environment][:framework_env]} rake #{flavor}:index >/dev/null 2>&1"
+          command "cd /data/#{app_name}/current && RAILS_ENV=#{node[:environment][:framework_env]} rake #{flavor}:index >/dev/null 2>&1"
           user node[:owner_name]
         end
       end
