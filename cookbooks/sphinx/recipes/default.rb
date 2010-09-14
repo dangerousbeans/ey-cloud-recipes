@@ -140,18 +140,20 @@ end
 
 if ['app', 'util'].include?(node[:instance_role])
 
-  template "/data/#{app_name}/shared/config/sphinx.yml" do
-        owner node[:owner_name]
-        group node[:owner_name]
-        mode 0644
-        source "sphinx.yml.erb"
-        variables({
-          :sphinx_ip => @node['master_app_server']['private_dns_name'].nil? ? "127.0.0.1" : @node['master_app_server']['private_dns_name'],
-          :app_name => app_name,
-          :flavor => flavor.eql?("thinking_sphinx") ? "thinkingsphinx" : flavor,
-          :mem_limit => 32,
-          :user => node[:owner_name]
-        })
-      end
+  run_for_app(appname) do |app_name, data|
+    template "/data/#{app_name}/shared/config/sphinx.yml" do
+      owner node[:owner_name]
+      group node[:owner_name]
+      mode 0644
+      backup 0
+      source "sphinx.yml.erb"
+      variables({
+      :sphinx_ip => @node['master_app_server']['private_dns_name'].nil? ? "127.0.0.1" : @node['master_app_server']['private_dns_name'],
+      :app_name => app_name,
+      :flavor => flavor.eql?("thinking_sphinx") ? "thinkingsphinx" : flavor,
+      :mem_limit => 32,
+      :user => node[:owner_name]
+      })
+    end
+  end
 end
-
