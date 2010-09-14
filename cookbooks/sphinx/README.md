@@ -28,11 +28,12 @@ You **MUST** update the [deloy hook][3] application name in order for sphinx to 
 Usage
 --------
 
-To enable this recipe you first must uncomment the [require_recipe][9] statement in main/recipes/default.rb.  Once you have done that you then need to update the [appname][8] in sphinx/recipes/default.rb.  Then commit those changes and use the [engineyard][10] and upload the recipes to the environment in question similar to
+To enable this recipe you first must uncomment the [require_recipe][9] statement in main/recipes/default.rb.  Once you have done that you then need to update the [appname][8] in sphinx/recipes/default.rb.  Then commit those changes and use the [engineyard][10] and upload the recipes to the environment in question,
 
 ``ey recipes upload -e <environment>``.  
 
-Then either apply the recipes like 
+Then either apply the recipes,
+
 ``ey recipes apply -e <environment>`` 
 
 or boot the environment in question.  Then install the [deploy hook][3] in question in your application root in a folder called 'deploy' called before_migrate.rb with the modified [appname][3] and commit that to your application repo and then deploy.  On an **initial** environment it may **fail** to start searchd initially until deploying. 
