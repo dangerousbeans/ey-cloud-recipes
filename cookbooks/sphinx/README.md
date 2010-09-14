@@ -34,7 +34,7 @@ To enable this recipe you first must uncomment the [require_recipe][9] statement
 
 Then either apply the recipes,
 
-``ey recipes apply -e <environment>`` 
+``ey recipes apply -e <environment>``. 
 
 or boot the environment in question.  Then install the [deploy hook][3] in question in your application root in a folder called 'deploy' called before_migrate.rb with the modified [appname][3] and commit that to your application repo and then deploy.  On an **initial** environment it may **fail** to start searchd initially until deploying. 
 
