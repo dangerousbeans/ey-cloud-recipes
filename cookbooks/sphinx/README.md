@@ -21,8 +21,14 @@ Design
 This recipe configures [sphinx][1] and searchd on the 'solo|app_master' instance.  It creates a sphinx.yml that is usable on the app instances to communicate with the searchd instance running on the app_master.  This is not meant to be a contradiction with other recipes that suggest to run on a utility instance if you need to change this behavior you can modify [default.rb][2] to change this logic.  Other portions of the recipe may need to be updated as well.
 
 Warnings
+--------
 
+You **MUST** update the [deloy hook][2] application name in order for sphinx to be monitored properly.  Failure to do so may cause searchd to be unmonitored and cause unacceptable behavior.  
 
+Bugs / Comments
+--------
+
+If you have any problems with this [recipe][5] please either comment and supply a pull with the patched code.  Otherwise if you have [support][6] please open a ticket at our [support][6] page if you lack support please use our [community][7] forums.
 
 
 
@@ -33,6 +39,8 @@ Warnings
 
 [1]: http://sphinxsearch.com/
 [2]: http://github.com/damm/ey-cloud-recipes/blob/sphinx_test/cookbooks/sphinx/recipes/default.rb#L151
-[3]: http://github.com/damm/fds/blob/master/deploy/before_migrate.rb
+[3]: http://github.com/damm/ey-cloud-recipes/blob/sphinx_test/cookbooks/sphinx/before_migrate.rb
 [4]: http://docs.engineyard.com/appcloud/howtos/customizations/custom-chef-recipes
-[5]: 
+[5]: http://github.com/damm/ey-cloud-recipes/tree/sphinx_test/cookbooks/sphinx
+[6]: http://support.cloud.engineyard.com/
+[7]: http://community.engineyard.com/
