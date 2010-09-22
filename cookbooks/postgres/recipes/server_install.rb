@@ -29,7 +29,7 @@ when "9.0"
     group "root"
   end
 
-  packages_to_install = ['dev-db/postgresql-base-9.0_rc1.tbz2','dev-db/postgresql-server-9.0_rc1.tbz2'].each do |packages_to_fetch|
+  packages_to_install = ['dev-db/postgresql-base-9.0.0.tbz2','dev-db/postgresql-server-9.0.0.tbz2'].each do |packages_to_fetch|
     remote_file "/engineyard/portage/packages/#{packages_to_fetch}" do
       source "http://ey-portage.s3.amazonaws.com/#{node[:kernel][:machine]}/#{packages_to_fetch}"
       not_if { FileTest.exists?("/engineyard/portage/packages/#{packages_to_fetch}") }
@@ -37,14 +37,14 @@ when "9.0"
     end
   end
 
-  execute "emerge /engineyard/portage/packages/dev-db/postgresql-base-9.0_rc1.tbz2" do
+  execute "emerge /engineyard/portage/packages/dev-db/postgresql-base-9.0.0.tbz2" do
     action :run
-    not_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-base-9.0_rc1") }
+    not_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-base-9.0.0") }
   end
 
-  execute "emerge /engineyard/portage/packages/dev-db/postgresql-server-9.0_rc1.tbz2" do
+  execute "emerge /engineyard/portage/packages/dev-db/postgresql-server-9.0.0.tbz2" do
     action :run
-    not_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-server-9.0_rc1") }
+    not_if { FileTest.directory?("/var/db/pkg/dev-db/postgresql-server-9.0.0") }
   end
 
   execute "eselect postgresql set #{postgres_version}" do
