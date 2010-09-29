@@ -3,9 +3,8 @@ define :createdb, :user => 'postgres' do
   statement = %{su - postgres -c "psql -h localhost -c \\"SELECT * FROM pg_database\\""}
   owner = params[:owner]
 
-  execute "createdb-#{db_name}" do
-    command "createdb -h localhost #{db_name}"
-    user params[:user]
+  psql "create database for #{db_name}" do
+    sql "CREATE DATABASE #{db_name} OWNER #{owner}"
 
     not_if "#{statement} | grep #{db_name}"
   end

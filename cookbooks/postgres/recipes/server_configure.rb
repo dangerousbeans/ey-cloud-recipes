@@ -13,6 +13,14 @@ directory "#{postgres_root}/#{postgres_version}" do
   recursive true
 end
 
+directory "/var/run/postgresql" do
+  owner "postgres"
+  group "postgres"
+  mode "0755"
+  action :create
+  recursive true
+end
+
 remote_file "/etc/conf.d/postgresql-#{postgres_version}" do
   source "#{postgres_version}/postgresql.conf"
   owner "root"
@@ -103,7 +111,7 @@ username = node.engineyard.ssh_username
 password = node.engineyard.ssh_password
 
 psql "create-db-user-#{username}" do
-  sql "create user #{username} with encrypted password '#{password}'"
+  sql "create user #{username} with encrypted password '#{password}' createdb"
   sql_not_if :sql => 'SELECT * FROM pg_roles',
              :assert => "grep -q #{username}"
 end
