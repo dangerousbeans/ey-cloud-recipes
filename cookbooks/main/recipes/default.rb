@@ -72,4 +72,5 @@
 #require_recipe "postgres::default"
 #require_recipe "redis"
 # This here is partially for 8.4 support, uncommenting this won't do anything at this time.
+require_recipe "ffmpeg"
 #require_recipe "postgres::setup_84"
