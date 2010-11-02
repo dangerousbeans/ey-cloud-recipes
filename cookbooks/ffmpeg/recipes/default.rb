@@ -26,7 +26,7 @@ remote_file "/usr/local/portage/overlay/ffmpeg.tar.gz" do
   backup 0
 end
 
-command "cd /usr/local/portage/overlay/ffmpeg/;tar zxfv /usr/local/overlay/ffmpeg.tar.gz" do
+execute "cd /usr/local/portage/overlay/ffmpeg/;tar zxfv /usr/local/overlay/ffmpeg.tar.gz" do
   action :run
   not_if { FileTest.exists?("/usr/local/overlay/ffmpeg/profiles/repo_name") }
 end
