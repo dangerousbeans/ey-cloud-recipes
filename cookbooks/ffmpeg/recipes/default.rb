@@ -47,7 +47,7 @@ enable_package "media-libs/x264" do
   version "0.0.20100605"
 end
 
-enable_package "libtheora" do
+enable_package "media-libs/libtheora" do
   version "1.1.1"
 end
 
