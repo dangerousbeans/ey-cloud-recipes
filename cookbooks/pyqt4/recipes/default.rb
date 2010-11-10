@@ -1,3 +1,7 @@
+enable_package "x11-libs/qt-svg" do
+  version "4.4.2"
+end
+
 enable_package "x11-libs/qt-core" do 
 version "4.4.2" 
 end
