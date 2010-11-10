@@ -1,3 +1,4 @@
+if ['solo', 'app', 'util', 'app_master'].include?(node[:instance_role])
 enable_package "x11-libs/qt-svg" do
   version "4.4.2"
 end
@@ -62,4 +63,5 @@ end
 package "x11-libs/qt-webkit" do
   version "4.4.2"
   action :install
+end
 end
