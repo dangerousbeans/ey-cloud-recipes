@@ -63,4 +63,3 @@ package "x11-libs/qt-webkit" do
   version "4.4.2"
   action :install
 end
-end
