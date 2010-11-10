@@ -22,7 +22,7 @@ enable_package "x11-libs/qt-script" do
 version "4.4.2" 
 end
 
-enable_package "dev-python/PyQT4" do 
+enable_package "dev-python/PyQt4" do 
 version "4.4.3" 
 end
 
@@ -42,7 +42,7 @@ source "http://ancient-distfiles.s3.amazonaws.com/PyQt-x11-gpl-4.4.3.tar.gz";
 backup 0 
 end
 
-package "dev-python/PyQT4" do 
+package "dev-python/PyQt4" do 
 version "4.4.3" 
 action :install 
 end
