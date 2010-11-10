@@ -30,8 +30,8 @@ enable_package "dev-python/PyQt4" do
 version "4.4.3" 
 end
 
-enable_package "dev-python/sip-4.7.7" do 
-version "4.4.3" 
+enable_package "dev-python/sip" do 
+version "4.7.7" 
 end
 
 # these files are here because I could not get this file with the proxy enabled
