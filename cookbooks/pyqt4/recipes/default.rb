@@ -14,8 +14,12 @@ enable_package "x11-libs/qt-qt3support" do
 version "4.4.2" 
 end
 
-enable_package "x11-libs/qt-sgl" do 
+enable_package "x11-libs/qt-sql" do 
 version "4.4.2" 
+end
+
+enable_package "x11-libs/qt-sgl" do
+  version "4.4.2"
 end
 
 enable_package "x11-libs/qt-webkit" do 
