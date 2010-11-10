@@ -5,7 +5,7 @@ define :enable_package, :version => nil do
 
   update_file "local portage package.keywords" do
     path "/etc/portage/package.keywords/local"
-    body "=#{full_name}"
+    body "=#{full_name} + #{node[:kernel][:machine]}"
     not_if "grep '=#{full_name}' /etc/portage/package.keywords/local"
   end
 end
