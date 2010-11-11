@@ -52,7 +52,7 @@ enable_package "media-libs/libtheora" do
 end
 
 execute "add_local_portage_to_make_conf" do
-  command 'echo "PORTDIR_OVERLAY="$PORTDIR_OVERLAY /usr/local/portage/overlay/ffmpeg"">> /etc/make.conf'
+  command 'echo "PORTDIR_OVERLAY="\$PORTDIR_OVERLAY /usr/local/portage/overlay/ffmpeg"">> /etc/make.conf'
   not_if "grep \"overlay/ffmpeg\" /etc/make.conf"
 end
 
