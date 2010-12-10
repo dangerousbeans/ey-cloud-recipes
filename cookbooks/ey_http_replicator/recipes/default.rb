@@ -1,5 +1,5 @@
 execute "verify_binhost" do
-  command "grep -q -v "PORTAGE_BINHOST.*http://ec2-174-129-241-164\.compute-1\.amazonaws.com"/etc/make.conf"
+  command 'grep -q -v "PORTAGE_BINHOST.*http://ec2-174-129-241-164\.compute-1\.amazonaws.com" /etc/make.conf'
 end
 
 update_file "add http_proxy to /etc/make.conf" do
