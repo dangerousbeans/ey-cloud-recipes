@@ -37,7 +37,7 @@
 #uncomment to run the resque-web recipe
 #require_recipe "resque_web"
 #require_recipe "mysql2"
-#require_recipe "ey_http_replicator"
+require_recipe "ey_http_replicator"
 #require_recipe "pyqt4"
 #uncomment to run the riak recipe
 #require_recipe "riak"
