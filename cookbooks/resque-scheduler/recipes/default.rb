@@ -13,7 +13,7 @@ if ['solo', 'util'].include?(node[:instance_role])
   end
 
    node[:applications].each do |app, data|
-    template "/etc/monit.d/resque_#{app}.monitrc" do
+    template "/etc/monit.d/resque_scheduler_#{app}.monitrc" do
       owner 'root'
       group 'root'
       mode 0644
