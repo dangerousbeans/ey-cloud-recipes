@@ -12,7 +12,7 @@ if ['solo', 'util'].include?(node[:instance_role])
     end
   end
 
-   node[:applications].each do |app, data|
+  node[:applications].each do |app, data|
     template "/etc/monit.d/resque_scheduler_#{app}.monitrc" do
       owner 'root'
       group 'root'
@@ -25,17 +25,17 @@ if ['solo', 'util'].include?(node[:instance_role])
     end
 
     remote_file "/data/#{app}/shared/bin/resque-scheduler" do
-     source "resque-scheduler"
-     owner 'root'
-     group 'root'
-     mode 0755
-     backup 0
+      source "resque-scheduler"
+      owner 'root'
+      group 'root'
+      mode 0755
+      backup 0
     end
-   end
+  end
 
-   execute "ensure-resque-is-setup-with-monit" do 
-    command %Q{ 
-    monit reload 
-    } 
+  execute "ensure-resque-is-setup-with-monit" do
+    command %Q{
+    monit reload
+    }
   end
 end
