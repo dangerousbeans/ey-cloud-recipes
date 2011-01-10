@@ -78,3 +78,6 @@ require_recipe "ey_http_replicator"
 # This here is partially for 8.4 support, uncommenting this won't do anything at this time.
 #require_recipe "ffmpeg"
 #require_recipe "postgres::setup_84"
+#
+#require_recipe "god"
+#require_recipe "god::unicorn"
