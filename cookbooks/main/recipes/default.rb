@@ -37,12 +37,10 @@
 #uncomment to run the resque-web recipe
 #require_recipe "resque_web"
 #require_recipe "mysql2"
-require_recipe "ey_http_replicator"
+#require_recipe "ey_http_replicator"
 
 #require_recipe "resque-scheduler"
 #require_recipe "pyqt4"
-#uncomment to run the riak recipe
-#require_recipe "riak"
 
 #uncomment to run the emacs recipe
 #require_recipe "emacs"
@@ -74,6 +72,7 @@ require_recipe "ey_http_replicator"
 #end
 #require_recipe "node"
 #require_recipe "postgres::default"
+require_recipe "postgresql9::default"
 #require_recipe "redis"
 # This here is partially for 8.4 support, uncommenting this won't do anything at this time.
 #require_recipe "ffmpeg"
