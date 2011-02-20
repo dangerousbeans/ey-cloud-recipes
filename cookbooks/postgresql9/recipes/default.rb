@@ -4,6 +4,7 @@ if ['solo', 'db_master'].include?(node[:instance_role])
   require_recipe "postgresql9::gem"
   require_recipe "postgresql9::server_configure"
   require_recipe "postgresql9::eybackup"
+  require_recipe "postgresql9::mysql_slimdown"
 end
 if ['solo', 'app_master', 'app', 'util'].include?(node[:instance_role])
   require_recipe "postgresql9::client_config"
