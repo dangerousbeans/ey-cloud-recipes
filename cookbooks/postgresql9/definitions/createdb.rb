@@ -3,18 +3,10 @@ define :createdb, :user => 'postgres' do
   statement = %{su - postgres -c "psql -h localhost -c \\"SELECT * FROM pg_database\\""}
   owner = params[:owner]
 
-  execute "createdb-#{db_name}" do
-    command "createdb -h localhost #{db_name}"
-    user params[:user]
-
+  execute "create database for #{db_name}" do
+    command %{psql -U postgres postgres -c \"CREATE DATABASE #{db_name} OWNER #{owner}\"}
+    
     not_if "#{statement} | grep #{db_name}"
-  end
-
-  psql "grant permissions to #{owner} on #{db_name}" do
-    action :nothing
-    sql "grant all on database #{db_name} to #{owner}"
-
-    subscribes :run, resources(:execute => "createdb-#{db_name}"), :immediately
   end
 
   psql "alter-public-schema-owner-on-#{db_name}-to-#{owner}" do

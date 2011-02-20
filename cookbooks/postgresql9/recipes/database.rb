@@ -20,14 +20,8 @@ node.engineyard.apps.each do |app|
     })
   end
 
-  execute "ln -sfv /data/#{app.name}/shared/config/keep.database.yml /data/#{app.name}/shared/config/database.yml" do
-    action :run
+    execute "ln -sfv /data/#{app.name}/shared/config/keep.database.yml /data/#{app.name}/shared/config/database.yml" do
+      action :run
+    end
   end
-
-  execute "ln -sfv /data/#{app.name}/shared/config/database.yml /data/#{app.name}/current/config/database.yml" do
-    action :run
-  end
-
-
-end
 end
