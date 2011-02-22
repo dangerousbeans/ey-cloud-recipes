@@ -72,7 +72,8 @@
 #end
 #require_recipe "node"
 #require_recipe "postgres::default"
-require_recipe "postgresql9::default"
+#require_recipe "cron_check"
+#require_recipe "postgresql9::default"
 #require_recipe "redis"
 # This here is partially for 8.4 support, uncommenting this won't do anything at this time.
 #require_recipe "ffmpeg"
