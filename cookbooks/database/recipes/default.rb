@@ -6,6 +6,7 @@ if ['solo', 'app', 'app_master', 'util'].include?(node[:instance_role])
     end
 
     template "/data/#{app.name}/shared/config/database.yml" do
+     # Set your custom Database Type here!
       dbtype = 'mysql2'
 
       owner node.engineyard.environment.ssh_username
