@@ -6,4 +6,4 @@
 	url = git://github.com/damm/ey-couchdb.git
 [submodule "cookbooks/sphinx"]
 	path = cookbooks/sphinx
-	url = git://github.com/damm/appcloud-tsphinx2.git
+	url = git://github.com/damm/ey-tsphinx2.git

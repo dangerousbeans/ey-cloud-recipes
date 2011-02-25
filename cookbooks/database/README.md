@@ -15,4 +15,4 @@ with the mysql2 adapter always.  It only has one dependency and that is
 the [dnapi][1] cookbook.
 
 [1]: https://github.com/damm/ey-cloud-recipes/tree/master/cookbooks/dnapi
-[2]: https://github.com/damm/ey-cloud-recipes/tree/master/cookbooks/
+[2]: https://github.com/damm/ey-cloud-recipes/blob/master/cookbooks/database/recipes/default.rb#L10
