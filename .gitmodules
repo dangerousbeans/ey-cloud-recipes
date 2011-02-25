@@ -7,3 +7,6 @@
 [submodule "cookbooks/sphinx"]
 	path = cookbooks/sphinx
 	url = git://github.com/damm/ey-tsphinx2.git
+[submodule "cookbooks/database"]
+	path = cookbooks/database
+	url = git://github.com/damm/ey-database.git
