@@ -10,3 +10,6 @@
 [submodule "cookbooks/database"]
 	path = cookbooks/database
 	url = git://github.com/damm/ey-database.git
+[submodule "cookbooks/redis-src"]
+	path = cookbooks/redis-src
+	url = git://github.com/damm/ey-redis-src.git
