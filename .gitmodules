@@ -13,3 +13,6 @@
 [submodule "cookbooks/redis-src"]
 	path = cookbooks/redis-src
 	url = git://github.com/damm/ey-redis-src.git
+[submodule "cookbooks/dnapi"]
+	path = cookbooks/dnapi
+	url = git://github.com/damm/ey-dnapi.git
