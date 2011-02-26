@@ -16,3 +16,6 @@
 [submodule "cookbooks/dnapi"]
 	path = cookbooks/dnapi
 	url = git://github.com/damm/ey-dnapi.git
+[submodule "cookbooks/cron_check"]
+	path = cookbooks/cron_check
+	url = git://github.com/damm/ey-cron_check.git
