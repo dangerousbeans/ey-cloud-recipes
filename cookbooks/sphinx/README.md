@@ -45,10 +45,10 @@ Notes
 If you wish to change the behavior of how searchd is restarted to a more graceful restart you are more then welcome to modify the [deploy hook][3] to your tastes.  Suggestions are open on this for an default of course.   
 
 
-Bugs / Comments
+Warranty 
 --------
 
-If you have any problems with this [recipe][5] please either comment and supply a pull with the patched code.  Otherwise if you have [support][6] please open a ticket at our [support][6] page if you lack support please use our [community][7] forums.
+If you have any problems with this [recipe][5] please either comment and supply a pull with the patched code.  This recipe is offered as is, and is not supported by Engine Yard.
 
 [1]: http://sphinxsearch.com/
 [2]: http://github.com/damm/ey-cloud-recipes/blob/sphinx_test/cookbooks/sphinx/recipes/default.rb#L151
