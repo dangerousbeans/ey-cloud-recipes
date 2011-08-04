@@ -1,1 +1,0 @@
-sudo "bluepill restart resque"

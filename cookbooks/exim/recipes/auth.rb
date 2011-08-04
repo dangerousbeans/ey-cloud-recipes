@@ -32,6 +32,3 @@ end
 package "mail-client/mailx" do
   action :install
 end
-
-# require_recipe "exim::monitoring"
-# disabled collectd monitoring by default

@@ -1,3 +1,0 @@
-= DESCRIPTION:
-
-Cookbook that will install node.js from github/ry/node.git and npm package manager to make use of node.js a bit easier on AppCloud
