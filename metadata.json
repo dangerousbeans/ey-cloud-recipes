@@ -1,5 +1,6 @@
 {
   "name": "postgresql",
+  "type": "blah",
   "description": "Installs and configures postgresql for clients or servers",
   "maintainer": "Opscode, Inc.",
   "maintainer_email": "cookbooks@opscode.com",
